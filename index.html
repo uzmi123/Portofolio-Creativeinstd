@@ -2,13 +2,13 @@
 <html lang="id" class="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Desain | Plus Jakarta Sans Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Studio Portfolio | Professional Clean</title>
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,40 +16,54 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        // Mengatur Plus Jakarta Sans sebagai font utama
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     colors: { darkBg: '#0f0f0f' }
                 }
             }
         }
     </script>
     <style>
-        .masonry-grid { column-count: 2; column-gap: 16px; }
-        @media (min-width: 768px) { .masonry-grid { column-count: 3; column-gap: 24px; } }
-        .masonry-item { break-inside: avoid; margin-bottom: 24px; }
+        /* MASONRY CONFIG - 2 COLUMNS ON MOBILE */
+        .masonry-grid { 
+            column-count: 2; 
+            column-gap: 12px; 
+        }
+        @media (min-width: 1024px) { 
+            .masonry-grid { column-count: 3; column-gap: 24px; }
+        }
+        
+        .masonry-item { break-inside: avoid; margin-bottom: 12px; }
+        @media (min-width: 1024px) { .masonry-item { margin-bottom: 24px; } }
+
         body { transition: background-color 0.4s, color 0.4s; font-family: 'Plus Jakarta Sans', sans-serif; }
         
+        /* ANIMATIONS */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .reveal { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .animate-zoom { animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         
-        .img-placeholder { background-color: #e2e8f0; }
-        .dark .img-placeholder { background-color: #1e1e1e; }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .animate-zoom { animation: zoomIn 0.3s ease-out; }
+
+        /* MARQUEE ANIMATION */
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        .animate-scroll-left { animation: scrollLeft 40s linear infinite; }
+        .animate-scroll-right { animation: scrollRight 45s linear infinite; }
+
+        /* ANTI-DOWNLOAD */
+        img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; pointer-events: auto; }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 antialiased font-sans">
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 antialiased font-sans" oncontextmenu="return false;">
 
-    <!-- Navigation Bar -->
-    <nav class="sticky top-0 z-40 bg-white/80 dark:bg-darkBg/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-white/10">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-white/70 dark:bg-darkBg/70 backdrop-blur-xl border-b border-slate-200/50 dark:border-white/10">
         <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-            <h1 class="text-xl font-extrabold tracking-tighter uppercase italic">Creativeinstd</h1>
-            <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/10 hover:scale-110 transition-all">
+            <h1 class="text-xl font-extrabold tracking-tighter uppercase italic">Studio.</h1>
+            <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-white/10 shadow-sm border border-slate-200 dark:border-white/10 hover:scale-110 transition-all">
                 <svg id="sun-icon" class="hidden w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 <svg id="moon-icon" class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 118.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
@@ -57,80 +71,100 @@
     </nav>
 
     <!-- Headline Section -->
-    <header class="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center reveal">
-        <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 leading-[1.15]">
-            Digital Experience <br class="hidden md:block"> & Visual Storytelling.
+    <header class="max-w-4xl mx-auto px-6 pt-12 pb-6 text-center reveal">
+        <h2 class="text-3xl md:text-6xl font-extrabold tracking-tight mb-4 leading-[1.15]">
+            Creative <br class="hidden md:block"> Visual Studio.
         </h2>
-        <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-            Kumpulan karya terpilih dalam bidang Branding, UI/UX, dan Desain Visual. Fokus pada estetika minimalis dan fungsi yang bermakna.
+        <p class="text-slate-500 dark:text-slate-400 text-sm md:text-lg font-medium max-w-xl mx-auto leading-relaxed">
+            Kumpulan karya desain terpilih & visual storytelling.
         </p>
     </header>
 
+    <!-- COMPACT CENTERED MARQUEE TAGS -->
+    <div class="max-w-2xl mx-auto overflow-hidden py-2 flex flex-col gap-2 reveal" style="animation-delay: 0.1s;">
+        <div class="flex whitespace-nowrap animate-scroll-left">
+            <div class="flex gap-2 px-2 text-slate-600 dark:text-slate-300">
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Portfolio</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Creativeinstd</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Sosmed Design</span>
+            </div>
+            <div class="flex gap-2 px-2 text-slate-600 dark:text-slate-300">
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Portfolio</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Creativeinstd</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Sosmed Design</span>
+            </div>
+        </div>
+        <div class="flex whitespace-nowrap animate-scroll-right">
+            <div class="flex gap-2 px-2 text-slate-600 dark:text-slate-300">
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">3D Cartoon</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Banner</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Flyer</span>
+            </div>
+            <div class="flex gap-2 px-2 text-slate-600 dark:text-slate-300">
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">3D Cartoon</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Banner</span>
+                <span class="px-4 py-1.5 bg-white/50 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full text-[8px] font-bold tracking-widest uppercase">Flyer</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Feed -->
-    <main class="max-w-6xl mx-auto px-6 py-4">
+    <main class="max-w-6xl mx-auto px-3 md:px-6 py-8">
         <div class="masonry-grid reveal" style="animation-delay: 0.2s;">
-            
-            <!-- Item 1: CAROUSEL -->
-            <div class="masonry-item group cursor-pointer relative" onclick="openPreview(['https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000', 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=1000', 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1000'], 'UI Design')">
-                <div class="absolute top-4 right-4 z-10 bg-black/30 backdrop-blur-md p-1.5 rounded-lg border border-white/20"><svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg></div>
-                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000" class="w-full rounded-[2rem] border border-slate-200 dark:border-white/5 shadow-sm group-hover:shadow-xl transition-all duration-500 img-placeholder">
+            <!-- Example Items -->
+            <div class="masonry-item group cursor-pointer relative" onclick="openPreview(['https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000', 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=1000'], 'UI Design')">
+                <div class="absolute top-3 right-3 z-10 bg-black/20 backdrop-blur-md p-1 rounded-lg border border-white/20"><svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg></div>
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000" class="w-full rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-sm transition-all duration-500">
             </div>
 
-            <!-- Item 2: SINGLE -->
             <div class="masonry-item group cursor-pointer" onclick="openPreview('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000', 'Branding')">
-                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000" class="w-full rounded-[2rem] border border-slate-200 dark:border-white/5 img-placeholder">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000" class="w-full rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-200 dark:border-white/5">
             </div>
 
-            <!-- Item 3: SINGLE -->
             <div class="masonry-item group cursor-pointer" onclick="openPreview('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000', 'Web Design')">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000" class="w-full rounded-[2rem] border border-slate-200 dark:border-white/5 img-placeholder">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000" class="w-full rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-200 dark:border-white/5">
             </div>
-
-            <!-- Item 4: CAROUSEL -->
-            <div class="masonry-item group cursor-pointer relative" onclick="openPreview(['https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000', 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=1000'], 'Identity')">
-                <div class="absolute top-4 right-4 z-10 bg-black/30 backdrop-blur-md p-1.5 rounded-lg border border-white/20"><svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg></div>
-                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000" class="w-full rounded-[2rem] border border-slate-200 dark:border-white/5 img-placeholder">
-            </div>
-
-            <!-- Item 5: SINGLE -->
+            
             <div class="masonry-item group cursor-pointer" onclick="openPreview('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000', 'Photography')">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000" class="w-full rounded-[2rem] border border-slate-200 dark:border-white/5 img-placeholder">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000" class="w-full rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-200 dark:border-white/5">
             </div>
-
         </div>
     </main>
+
+    <!-- NEW CLEAN FOOTER SECTION -->
+    <footer class="max-w-6xl mx-auto px-6 py-16 text-center reveal">
+        <div class="h-px w-8 bg-slate-200 dark:bg-white/10 mx-auto mb-6"></div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            &copy; 2024 Studio Portfolio. All Rights Reserved.
+        </p>
+        <p class="text-[10px] text-slate-400 dark:text-slate-500 mt-1.5">
+            Visual Content Protected. Built with Plus Jakarta Sans.
+        </p>
+    </footer>
 
     <!-- PREVIEW MODAL -->
     <div id="preview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 md:p-10">
         <div class="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl" onclick="closePreview()"></div>
         <div class="relative w-fit max-w-full animate-zoom flex flex-col items-center">
-            
             <button onclick="closePreview()" class="absolute -top-12 right-0 md:-top-2 md:-right-14 text-slate-800 dark:text-white/80 transition-all">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-
             <div class="relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl border border-white/40 dark:border-white/10 bg-white/5 flex items-center">
-                
-                <button id="prevBtn" onclick="changeSlide(-1)" class="absolute left-5 z-20 w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-full text-white hover:bg-white/40 hidden">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-
+                <button id="prevBtn" onclick="changeSlide(-1)" class="absolute left-5 z-20 w-11 h-11 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-full text-white hidden"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
                 <div class="absolute top-7 left-8 z-10 px-4 py-2 bg-white/20 dark:bg-black/30 backdrop-blur-xl border border-white/30 dark:border-white/10 rounded-2xl">
-                    <span id="preview-tag" class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-900 dark:text-white">Category</span>
+                    <span id="preview-tag" class="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-900 dark:text-white">Category</span>
                 </div>
-                
                 <img id="preview-img" src="" alt="Preview" class="max-h-[75vh] md:max-h-[85vh] w-auto object-contain transition-all duration-300">
-
-                <button id="nextBtn" onclick="changeSlide(1)" class="absolute right-5 z-20 w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-full text-white hover:bg-white/40 hidden">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
+                <button id="nextBtn" onclick="changeSlide(1)" class="absolute right-5 z-20 w-11 h-11 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-full text-white hidden"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
             </div>
-
-            <div id="carousel-dots" class="flex gap-2.5 mt-8 hidden"></div>
+            <div id="carousel-dots" class="flex gap-2 mt-8 hidden"></div>
         </div>
     </div>
 
     <script>
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+
         let currentImages = [];
         let currentIndex = 0;
 
@@ -178,13 +212,10 @@
             }, 100);
 
             if (currentImages.length > 1) {
-                prevBtn.classList.remove('hidden');
-                nextBtn.classList.remove('hidden');
-                dotsContainer.classList.remove('hidden');
-                renderDots();
+                prevBtn.classList.remove('hidden'); nextBtn.classList.remove('hidden');
+                dotsContainer.classList.remove('hidden'); renderDots();
             } else {
-                prevBtn.classList.add('hidden');
-                nextBtn.classList.add('hidden');
+                prevBtn.classList.add('hidden'); nextBtn.classList.add('hidden');
                 dotsContainer.classList.add('hidden');
             }
         }
@@ -200,7 +231,7 @@
             dotsContainer.innerHTML = '';
             currentImages.forEach((_, i) => {
                 const dot = document.createElement('div');
-                dot.className = `h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-slate-900 dark:bg-white w-6' : 'bg-slate-300 dark:bg-white/20 w-1.5'}`;
+                dot.className = `h-1 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-slate-900 dark:bg-white w-5' : 'bg-slate-300 dark:bg-white/20 w-1'}`;
                 dotsContainer.appendChild(dot);
             });
         }
