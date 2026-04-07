@@ -3,202 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | Professional Showcase</title>
+    <title>My Portfolio | Creative Showcase</title>
     
-    <!-- Google Font: Plus Jakarta Sans (Sangat Kekinian) -->
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
+        /* --- VARIABLES & THEMES --- */
         :root {
-            --bg-color: #ffffff;
-            --text-color: #111111;
-            --secondary-text: #777777;
-            --accent-color: #f5f5f7;
-            --radius: 28px; /* Sudut membulat modern */
+            --bg: #ffffff;
+            --text: #111111;
+            --text-light: #777777;
+            --accent: #f8f8f8;
+            --radius: 35px;
+            --container-padding: 10%; /* Jarak konten dari pinggir layar */
+            --transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
+        .dark-mode {
+            --bg: #0d0d0d;
+            --text: #ffffff;
+            --text-light: #aaaaaa;
+            --accent: #1a1a1a;
+        }
+
+        /* --- BASIC RESET --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.5;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: var(--transition);
+            overflow-x: hidden;
+            padding-bottom: 100px;
         }
 
         /* --- NAVIGATION --- */
         nav {
-            position: sticky;
-            top: 0;
+            padding: 40px var(--container-padding);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 5%;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
             z-index: 1000;
+            transition: var(--transition);
         }
 
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 0.9rem; margin-left: 25px; }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; }
 
-        /* --- HERO SECTION --- */
-        header.hero {
-            padding: 80px 5% 40px;
+        /* DARK MODE BUTTON */
+        #theme-toggle {
+            background: var(--accent);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        #theme-toggle:hover { transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 60px var(--container-padding) 80px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 800;
-            line-height: 1;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
             letter-spacing: -3px;
+            font-weight: 800;
             margin-bottom: 20px;
         }
 
         .hero p {
-            color: var(--secondary-text);
-            max-width: 500px;
-            font-size: 1.1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 600px;
         }
 
         /* --- CATEGORY SECTION --- */
-        section.category {
-            padding: 40px 0;
+        .category-section {
+            margin-bottom: 100px;
         }
 
-        .category-info {
-            padding: 0 5%;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+        .category-header {
+            padding: 0 var(--container-padding);
+            margin-bottom: 25px;
         }
 
-        .category-info h2 {
+        .category-header h2 {
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -1px;
         }
 
-        /* --- HORIZONTAL SCROLL SLIDER --- */
-        .slider-wrapper {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 5%;
-            gap: 20px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+        /* --- SLIDER CONTAINER --- */
+        .slider-outer {
+            width: 100%;
+            overflow: hidden;
         }
 
-        .slider-wrapper::-webkit-scrollbar {
-            display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+        .slider-inner {
+            display: flex;
+            overflow-x: auto;
+            /* Memberikan padding kiri agar gambar awal sejajar dengan logo/judul */
+            padding-left: var(--container-padding); 
+            padding-right: var(--container-padding);
+            gap: 25px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .slider-inner::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         .portfolio-card {
             flex: 0 0 auto;
             scroll-snap-align: start;
             border-radius: var(--radius);
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: var(--transition);
         }
 
         .portfolio-card:hover {
-            transform: scale(0.97);
+            transform: translateY(-10px);
         }
 
-        /* Menyesuaikan Otomatis Aspect Ratio */
         .portfolio-card img {
-            height: 450px; /* Tinggi seragam agar rapi secara vertikal */
-            width: auto;   /* Lebar otomatis menyesuaikan proporsi asli */
+            height: 480px; /* Tinggi seragam agar rapi vertikal */
+            width: auto;   /* Lebar otomatis menyesuaikan proporsi gambar */
+            min-width: 300px;
             display: block;
-            border-radius: var(--radius);
             object-fit: cover;
-            background-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-radius: var(--radius);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            background-color: var(--accent);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 100px 5% 40px;
-            text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 50px;
-        }
-
-        footer p { color: var(--secondary-text); font-size: 0.9rem; }
-
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
-            header.hero { padding-top: 40px; }
+            :root { --container-padding: 6%; }
+            nav { padding-top: 25px; }
             .portfolio-card img {
-                height: 320px; /* Lebih pendek di HP agar pas di layar */
+                height: 350px; /* Tinggi lebih pendek di HP */
             }
-            .category-info h2 { font-size: 1.4rem; }
+            .hero h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">PORTFOLIO.</div>
-        <div class="nav-links">
-            <a href="#work">Work</a>
-            <a href="mailto:email@kamu.com">Contact</a>
-        </div>
+        <div class="logo">WORK.DIR</div>
+        <button id="theme-toggle">
+            <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+        </button>
     </nav>
 
     <header class="hero">
-        <h1>Visual Arts & <br>Design Works.</h1>
-        <p>Kumpulan karya kreatif terbaik dalam desain grafis, fotografi, dan seni digital.</p>
+        <h1>Creative <br>Portfolio Projects.</h1>
+        <p>Menampilkan karya terbaik dalam desain visual dan branding.</p>
     </header>
 
-    <!-- KATEGORI 1: EDIT SESUAI KEBUTUHAN -->
-    <section class="category" id="work">
-        <div class="category-info">
-            <h2>Branding Design</h2>
-            <p style="color: #ccc;">Swipe &rarr;</p>
+    <!-- 1. FEED DAN STORY -->
+    <div class="category-section">
+        <div class="category-header">
+            <h2>1. Feed dan Story</h2>
         </div>
-        <div class="slider-wrapper">
-            <!-- Item 1 (Portrait) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600" alt="Work 1">
-            </div>
-            <!-- Item 2 (Square) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1635405074683-96d6921a2a2c?q=80&w=800" alt="Work 2">
-            </div>
-            <!-- Item 3 (Landscape) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=1000" alt="Work 3">
+        <div class="slider-outer">
+            <div class="slider-inner">
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800" alt="Social Media"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&q=80&w=600" alt="Social Media"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&q=80&w=1000" alt="Social Media"></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- KATEGORI 2 -->
-    <section class="category">
-        <div class="category-info">
-            <h2>Fine Art & Photography</h2>
+    <!-- 2. IDENTITAS VISUAL (BRANDING) -->
+    <div class="category-section">
+        <div class="category-header">
+            <h2>2. Identitas Visual (Branding)</h2>
         </div>
-        <div class="slider-wrapper">
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800" alt="Work 4">
-            </div>
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=700" alt="Work 5">
-            </div>
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200" alt="Work 6">
+        <div class="slider-outer">
+            <div class="slider-inner">
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" alt="Branding"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=600" alt="Branding"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1634942550159-640d401bd351?auto=format&fit=crop&q=80&w=1000" alt="Branding"></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 Copyright © by Creativein.ig. All Right Reserved.</p>
-    </footer>
+    <!-- 3. BANNER, FLYER, POSTER -->
+    <div class="category-section">
+        <div class="category-header">
+            <h2>3. Banner, Flyer, Poster</h2>
+        </div>
+        <div class="slider-outer">
+            <div class="slider-inner">
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?auto=format&fit=crop&q=80&w=800" alt="Graphic Design"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1623282033815-40b05d96c9bb?auto=format&fit=crop&q=80&w=1200" alt="Graphic Design"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=700" alt="Graphic Design"></div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 4. PRODUK FOTO -->
+    <div class="category-section">
+        <div class="category-header">
+            <h2>4. Produk Foto</h2>
+        </div>
+        <div class="slider-outer">
+            <div class="slider-inner">
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800" alt="Product"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000" alt="Product"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=900" alt="Product"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. PACKAGING (LABEL/STICKER) -->
+    <div class="category-section">
+        <div class="category-header">
+            <h2>5. Packaging (Label/Sticker)</h2>
+        </div>
+        <div class="slider-outer">
+            <div class="slider-inner">
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=800" alt="Packaging"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=1000" alt="Packaging"></div>
+                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?auto=format&fit=crop&q=80&w=900" alt="Packaging"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SCRIPT UNTUK TOGGLE DARK MODE
+        const btn = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+        const body = document.body;
+
+        btn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            icon.innerText = isDark ? '☀️' : '🌙';
+            text.innerText = isDark ? 'Light Mode' : 'Dark Mode';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Simpan preferensi user di browser
+        if(localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            icon.innerText = '☀️';
+            text.innerText = 'Light Mode';
+        }
+
+        // Script untuk scroll mouse wheel mendatar di area slider
+        const sliders = document.querySelectorAll('.slider-inner');
+        sliders.forEach((slider) => {
+            slider.addEventListener('wheel', (e) => {
+                if (e.deltaY != 0) {
+                    e.preventDefault();
+                    slider.scrollLeft += e.deltaY;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
