@@ -3,75 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | Professional Showcase</title>
-    
-    <!-- Google Font: Plus Jakarta Sans (Sangat Kekinian) -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>My Creative Portfolio</title>
+    <!-- Font Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Icon -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #111111;
-            --secondary-text: #777777;
-            --accent-color: #f5f5f7;
-            --radius: 28px; /* Sudut membulat modern */
-        }
-
+        /* --- RESET & BASIC --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.5;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: sticky;
-            top: 0;
+        /* --- HEADER --- */
+        header {
+            padding: 40px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 5%;
+            position: sticky;
+            top: 0;
             background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
+            backdrop-filter: blur(10px);
+            z-index: 100;
         }
 
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 0.9rem; margin-left: 25px; }
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #000;
+        }
 
         /* --- HERO SECTION --- */
-        header.hero {
-            padding: 80px 5% 40px;
+        .hero {
+            padding: 60px 5% 40px;
+            max-width: 800px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -3px;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 20px;
         }
 
         .hero p {
-            color: var(--secondary-text);
-            max-width: 500px;
+            color: #666;
             font-size: 1.1rem;
         }
 
         /* --- CATEGORY SECTION --- */
-        section.category {
+        .category-section {
             padding: 40px 0;
         }
 
-        .category-info {
+        .category-title {
             padding: 0 5%;
             margin-bottom: 20px;
             display: flex;
@@ -79,126 +87,156 @@
             align-items: flex-end;
         }
 
-        .category-info h2 {
+        .category-title h2 {
             font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-weight: 600;
         }
 
-        /* --- HORIZONTAL SCROLL SLIDER --- */
-        .slider-wrapper {
+        /* --- SLIDER (Horizontal Scroll) --- */
+        .slider-container {
             display: flex;
             overflow-x: auto;
             padding: 10px 5%;
             gap: 20px;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+            scrollbar-width: none; /* Hide scrollbar Firefox */
         }
 
-        .slider-wrapper::-webkit-scrollbar {
-            display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+        .slider-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
         }
 
-        .portfolio-card {
+        .portfolio-item {
             flex: 0 0 auto;
             scroll-snap-align: start;
-            border-radius: var(--radius);
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 24px;
+            overflow: hidden;
+            background: #f4f4f4;
+            transition: transform 0.4s ease;
         }
 
-        .portfolio-card:hover {
-            transform: scale(0.97);
+        .portfolio-item:hover {
+            transform: scale(0.98);
         }
 
-        /* Menyesuaikan Otomatis Aspect Ratio */
-        .portfolio-card img {
-            height: 450px; /* Tinggi seragam agar rapi secara vertikal */
-            width: auto;   /* Lebar otomatis menyesuaikan proporsi asli */
+        /* Menyesuaikan berbagai Aspect Ratio */
+        .portfolio-item img {
             display: block;
-            border-radius: var(--radius);
+            height: 400px; /* Tinggi tetap di desktop agar rapi */
+            width: auto;   /* Lebar otomatis mengikuti aspect ratio gambar */
+            max-width: 600px;
             object-fit: cover;
-            background-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-radius: 24px;
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 100px 5% 40px;
+            padding: 100px 5% 50px;
             text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 50px;
+            color: #999;
+            font-size: 0.8rem;
         }
-
-        footer p { color: var(--secondary-text); font-size: 0.9rem; }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
-            header.hero { padding-top: 40px; }
-            .portfolio-card img {
-                height: 320px; /* Lebih pendek di HP agar pas di layar */
+            header { padding: 20px 5%; }
+            .hero { padding: 40px 5%; }
+            
+            .portfolio-item img {
+                height: 300px; /* Tinggi lebih pendek di HP */
+                max-width: 85vw;
             }
-            .category-info h2 { font-size: 1.4rem; }
+
+            .category-title h2 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">PORTFOLIO.</div>
-        <div class="nav-links">
-            <a href="#work">Work</a>
-            <a href="mailto:email@kamu.com">Contact</a>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <h1>Visual Arts & <br>Design Works.</h1>
-        <p>Kumpulan karya kreatif terbaik dalam desain grafis, fotografi, dan seni digital.</p>
+    <header>
+        <div class="logo">STUDIO.JS</div>
+        <nav>
+            <a href="#">Work</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
     </header>
 
-    <!-- KATEGORI 1: EDIT SESUAI KEBUTUHAN -->
-    <section class="category" id="work">
-        <div class="category-info">
-            <h2>Branding Design</h2>
-            <p style="color: #ccc;">Swipe &rarr;</p>
-        </div>
-        <div class="slider-wrapper">
-            <!-- Item 1 (Portrait) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600" alt="Work 1">
-            </div>
-            <!-- Item 2 (Square) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1635405074683-96d6921a2a2c?q=80&w=800" alt="Work 2">
-            </div>
-            <!-- Item 3 (Landscape) -->
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=1000" alt="Work 3">
-            </div>
-        </div>
+    <section class="hero">
+        <h1>Digital Artist & Visual Designer.</h1>
+        <p>Koleksi hasil karya pilihan dalam desain grafis, ilustrasi, dan fotografi.</p>
     </section>
+
+    <!-- KATEGORI 1 -->
+    <div class="category-section">
+        <div class="category-title">
+            <h2>Digital Illustration</h2>
+            <p style="color: #999; font-size: 0.8rem;">Geser &rarr;</p>
+        </div>
+        <div class="slider-container">
+            <!-- Gambar Portofolio (Ganti src dengan link gambar Anda) -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="Work 1">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&q=80&w=600" alt="Work 2">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1576153192396-180ecef2a715?auto=format&fit=crop&q=80&w=1000" alt="Work 3">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" alt="Work 4">
+            </div>
+        </div>
+    </div>
 
     <!-- KATEGORI 2 -->
-    <section class="category">
-        <div class="category-info">
-            <h2>Fine Art & Photography</h2>
+    <div class="category-section">
+        <div class="category-title">
+            <h2>Brand Identity</h2>
+            <p style="color: #999; font-size: 0.8rem;">Geser &rarr;</p>
         </div>
-        <div class="slider-wrapper">
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800" alt="Work 4">
+        <div class="slider-container">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" alt="Work 5">
             </div>
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=700" alt="Work 5">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800" alt="Work 6">
             </div>
-            <div class="portfolio-card">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200" alt="Work 6">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=1000" alt="Work 7">
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- KATEGORI 3 -->
+    <div class="category-section">
+        <div class="category-title">
+            <h2>Photography</h2>
+            <p style="color: #999; font-size: 0.8rem;">Geser &rarr;</p>
+        </div>
+        <div class="slider-container">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600" alt="Work 8">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200" alt="Work 9">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?auto=format&fit=crop&q=80&w=700" alt="Work 10">
+            </div>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2024 Nama Kamu. Dibuat dengan HTML & CSS Modern.</p>
+        <p>&copy; 2024 Nama Kamu. Dibuat dengan dedikasi.</p>
     </footer>
 
+    <script>
+        // Inisialisasi Ikon Lucide
+        lucide.createIcons();
+    </script>
 </body>
 </html>
