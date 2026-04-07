@@ -3,48 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Portfolio | Dual-Grid Layout</title>
+    <title>Portfolio | Smooth Dual-Grid</title>
     
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES & THEMES --- */
         :root {
             --bg: #ffffff;
             --text: #111111;
             --text-light: #888888;
-            --accent: #f2f2f2;
-            --radius: 20px; /* Lebih kecil agar proporsional dengan gambar kecil */
+            --accent: #f4f4f4;
+            --radius: 20px;
             --container-padding: 10%;
-            --img-height: 220px; /* Tinggi gambar per baris */
+            --img-height: 220px; /* Tinggi satu baris gambar */
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .dark-mode {
-            --bg: #0a0a0a;
+            --bg: #0d0d0d;
             --text: #ffffff;
-            --text-light: #aaaaaa;
+            --text-light: #999999;
             --accent: #1a1a1a;
         }
 
-        /* --- BASIC RESET --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
             background-color: var(--bg);
             color: var(--text);
             transition: background-color 0.5s ease;
             overflow-x: hidden;
-            padding-bottom: 80px;
+            padding-bottom: 100px;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAV --- */
         nav {
             padding: 30px var(--container-padding);
             display: flex;
@@ -54,7 +46,6 @@
             top: 0;
             background: var(--bg);
             z-index: 1000;
-            transition: var(--transition);
         }
 
         .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
@@ -62,7 +53,7 @@
         #theme-toggle {
             background: var(--accent);
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 50px;
             cursor: pointer;
             color: var(--text);
@@ -71,194 +62,136 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: var(--transition);
         }
 
         /* --- HERO --- */
-        .hero {
-            padding: 40px var(--container-padding) 60px;
-        }
+        .hero { padding: 40px var(--container-padding) 60px; }
+        .hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; }
+        .hero p { color: var(--text-light); font-size: 1.1rem; max-width: 500px; }
 
-        .hero h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            line-height: 1;
-            letter-spacing: -2px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            color: var(--text-light);
-            font-size: 1rem;
-            max-width: 500px;
-        }
-
-        /* --- CATEGORY SECTION --- */
-        .category-section {
-            margin-bottom: 70px;
-        }
-
-        .category-header {
-            padding: 0 var(--container-padding);
-            margin-bottom: 20px;
-        }
-
-        .category-header h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        /* --- DUAL STACK SLIDER (GRID) --- */
-        .slider-outer {
-            width: 100%;
-            overflow: hidden;
-        }
+        /* --- CATEGORY & SLIDER --- */
+        .category-section { margin-bottom: 80px; }
+        .category-header { padding: 0 var(--container-padding); margin-bottom: 20px; }
+        .category-header h2 { font-size: 1.4rem; font-weight: 700; }
 
         .slider-inner {
             display: grid;
-            /* Membuat 2 baris otomatis */
-            grid-template-rows: repeat(2, var(--img-height));
-            grid-auto-flow: column; /* Mengalir ke samping */
+            grid-template-rows: repeat(2, var(--img-height)); /* 2 Tumpukan baris */
+            grid-auto-flow: column;
             grid-auto-columns: min-content;
             gap: 15px;
             padding: 0 var(--container-padding);
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Firefox */
             scroll-behavior: smooth;
+            /* proximity agar scroll mouse lebih ringan */
+            scroll-snap-type: x proximity; 
+            scrollbar-width: none;
         }
 
-        .slider-inner::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
+        .slider-inner::-webkit-scrollbar { display: none; }
 
         .portfolio-card {
             scroll-snap-align: start;
             border-radius: var(--radius);
             overflow: hidden;
-            transition: var(--transition);
             background: var(--accent);
+            transition: var(--transition);
         }
 
-        .portfolio-card:hover {
-            transform: scale(0.97);
-        }
+        .portfolio-card:hover { transform: scale(0.97); }
 
         .portfolio-card img {
-            height: 100%; /* Mengikuti tinggi row (220px) */
-            width: auto;  /* Lebar otomatis sesuai aspect ratio */
+            height: 100%;
+            width: auto;
+            min-width: 200px;
             display: block;
             object-fit: cover;
             border-radius: var(--radius);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 50px var(--container-padding);
-            border-top: 1px solid var(--accent);
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
+        footer { text-align: center; padding: 50px; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid var(--accent); }
 
-        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            :root { 
-                --container-padding: 6%; 
-                --img-height: 160px; /* Lebih kecil di HP */
-            }
+            :root { --container-padding: 6%; --img-height: 160px; }
             .hero h1 { font-size: 2.2rem; }
-            .category-header h2 { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">PORTFOLIO.JS</div>
+        <div class="logo">WORK.DIR</div>
         <button id="theme-toggle">
             <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
         </button>
     </nav>
 
     <header class="hero">
-        <h1>Selected <br>Graphic Works.</h1>
-        <p>Koleksi desain kreatif dan identitas visual yang disusun secara sistematis.</p>
+        <h1>Creative <br>Selected Works.</h1>
+        <p>Kumpulan proyek desain terbaik dalam tampilan minimalis.</p>
     </header>
 
-    <!-- 1. FEED DAN STORY -->
+    <!-- KATEGORI 1 -->
     <div class="category-section">
         <div class="category-header"><h2>1. Feed dan Story</h2></div>
-        <div class="slider-outer">
-            <div class="slider-inner">
-                <!-- Tambahkan banyak gambar di sini, otomatis akan terbagi 2 baris (atas-bawah) -->
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600" alt="1"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=500" alt="2"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=700" alt="3"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=800" alt="4"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162618071-b39a2ad055fd?q=80&w=600" alt="5"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=500" alt="6"></div>
-            </div>
+        <div class="slider-inner js-slider">
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600" alt="1"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=500" alt="2"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=700" alt="3"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=800" alt="4"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162618071-b39a2ad055fd?q=80&w=600" alt="5"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=500" alt="6"></div>
         </div>
     </div>
 
-    <!-- 2. IDENTITAS VISUAL -->
+    <!-- KATEGORI 2 -->
     <div class="category-section">
         <div class="category-header"><h2>2. Identitas Visual (Branding)</h2></div>
-        <div class="slider-outer">
-            <div class="slider-inner">
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=700" alt="B1"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600" alt="B2"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1634942550159-640d401bd351?q=80&w=800" alt="B3"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=500" alt="B4"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=900" alt="B5"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=600" alt="B6"></div>
-            </div>
+        <div class="slider-inner js-slider">
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=700" alt="B1"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600" alt="B2"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1634942550159-640d401bd351?q=80&w=800" alt="B3"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=500" alt="B4"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=900" alt="B5"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=600" alt="B6"></div>
         </div>
     </div>
 
-    <!-- 3. BANNER, FLYER, POSTER -->
+    <!-- KATEGORI 3 -->
     <div class="category-section">
         <div class="category-header"><h2>3. Banner, Flyer, Poster</h2></div>
-        <div class="slider-outer">
-            <div class="slider-inner">
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?q=80&w=700" alt="P1"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1623282033815-40b05d96c9bb?q=80&w=1000" alt="P2"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600" alt="P3"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1603380353725-f8a4d39cc41e?q=80&w=800" alt="P4"></div>
-            </div>
+        <div class="slider-inner js-slider">
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?q=80&w=700" alt="P1"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1623282033815-40b05d96c9bb?q=80&w=1000" alt="P2"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600" alt="P3"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1603380353725-f8a4d39cc41e?q=80&w=800" alt="P4"></div>
         </div>
     </div>
 
-    <!-- 4. PRODUK FOTO -->
+    <!-- KATEGORI 4 -->
     <div class="category-section">
         <div class="category-header"><h2>4. Produk Foto</h2></div>
-        <div class="slider-outer">
-            <div class="slider-inner">
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800" alt="PR1"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000" alt="PR2"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=900" alt="PR3"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600" alt="PR4"></div>
-            </div>
+        <div class="slider-inner js-slider">
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800" alt="PR1"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000" alt="PR2"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=900" alt="PR3"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600" alt="PR4"></div>
         </div>
     </div>
 
-    <!-- 5. PACKAGING -->
+    <!-- KATEGORI 5 -->
     <div class="category-section">
         <div class="category-header"><h2>5. Packaging (Label/Sticker)</h2></div>
-        <div class="slider-outer">
-            <div class="slider-inner">
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800" alt="PK1"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1000" alt="PK2"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?q=80&w=900" alt="PK3"></div>
-                <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1501159596142-6320749007f3?q=80&w=700" alt="PK4"></div>
-            </div>
+        <div class="slider-inner js-slider">
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800" alt="PK1"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1000" alt="PK2"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?q=80&w=900" alt="PK3"></div>
+            <div class="portfolio-card"><img src="https://images.unsplash.com/photo-1501159596142-6320749007f3?q=80&w=700" alt="PK4"></div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Creative Portfolio — GitHub Pages Ready</p>
+        <p>&copy; 2025 Portfolio. Dioptimalkan untuk Desktop & Mobile.</p>
     </footer>
 
     <script>
@@ -282,21 +215,20 @@
             text.innerText = 'Light Mode';
         }
 
-        // SMOOTH MOUSE WHEEL SCROLL
-        const sliders = document.querySelectorAll('.slider-inner');
+        // MOUSE WHEEL HORIZONTAL SCROLL FIX
+        const sliders = document.querySelectorAll('.js-slider');
         
         sliders.forEach((slider) => {
             slider.addEventListener('wheel', (e) => {
-                // Jika user scroll mouse vertikal (deltaY), ubah jadi scroll horizontal
                 if (e.deltaY !== 0) {
+                    // Mencegah halaman utama scroll ke bawah saat mouse di atas slider
                     e.preventDefault();
-                    // Menambahkan animasi scroll yang lebih halus
-                    slider.scrollBy({
-                        left: e.deltaY * 1.5, // 1.5 adalah multiplier kecepatan
-                        behavior: 'auto' // 'auto' agar terasa responsif mengikuti jari/wheel
-                    });
+                    
+                    // Mengubah scroll vertikal mouse menjadi horizontal
+                    // Kita gunakan scrollLeft secara manual agar lebih akurat
+                    slider.scrollLeft += e.deltaY * 1.5;
                 }
-            });
+            }, { passive: false }); // Penting: passive false agar preventDefault bekerja
         });
     </script>
 </body>
