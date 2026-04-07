@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Professional Showcase</title>
+    
+    <!-- Google Font: Plus Jakarta Sans (Sangat Kekinian) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111111;
+            --secondary-text: #777777;
+            --accent-color: #f5f5f7;
+            --radius: 28px; /* Sudut membulat modern */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 0.9rem; margin-left: 25px; }
+
+        /* --- HERO SECTION --- */
+        header.hero {
+            padding: 80px 5% 40px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--secondary-text);
+            max-width: 500px;
+            font-size: 1.1rem;
+        }
+
+        /* --- CATEGORY SECTION --- */
+        section.category {
+            padding: 40px 0;
+        }
+
+        .category-info {
+            padding: 0 5%;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .category-info h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* --- HORIZONTAL SCROLL SLIDER --- */
+        .slider-wrapper {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 5%;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+        }
+
+        .slider-wrapper::-webkit-scrollbar {
+            display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+        }
+
+        .portfolio-card {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            border-radius: var(--radius);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .portfolio-card:hover {
+            transform: scale(0.97);
+        }
+
+        /* Menyesuaikan Otomatis Aspect Ratio */
+        .portfolio-card img {
+            height: 450px; /* Tinggi seragam agar rapi secara vertikal */
+            width: auto;   /* Lebar otomatis menyesuaikan proporsi asli */
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+            background-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 5% 40px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 50px;
+        }
+
+        footer p { color: var(--secondary-text); font-size: 0.9rem; }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 768px) {
+            header.hero { padding-top: 40px; }
+            .portfolio-card img {
+                height: 320px; /* Lebih pendek di HP agar pas di layar */
+            }
+            .category-info h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">PORTFOLIO.</div>
+        <div class="nav-links">
+            <a href="#work">Work</a>
+            <a href="mailto:email@kamu.com">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Visual Arts & <br>Design Works.</h1>
+        <p>Kumpulan karya kreatif terbaik dalam desain grafis, fotografi, dan seni digital.</p>
+    </header>
+
+    <!-- KATEGORI 1: EDIT SESUAI KEBUTUHAN -->
+    <section class="category" id="work">
+        <div class="category-info">
+            <h2>Branding Design</h2>
+            <p style="color: #ccc;">Swipe &rarr;</p>
+        </div>
+        <div class="slider-wrapper">
+            <!-- Item 1 (Portrait) -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600" alt="Work 1">
+            </div>
+            <!-- Item 2 (Square) -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1635405074683-96d6921a2a2c?q=80&w=800" alt="Work 2">
+            </div>
+            <!-- Item 3 (Landscape) -->
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=1000" alt="Work 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- KATEGORI 2 -->
+    <section class="category">
+        <div class="category-info">
+            <h2>Fine Art & Photography</h2>
+        </div>
+        <div class="slider-wrapper">
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800" alt="Work 4">
+            </div>
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=700" alt="Work 5">
+            </div>
+            <div class="portfolio-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200" alt="Work 6">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Nama Kamu. Dibuat dengan HTML & CSS Modern.</p>
+    </footer>
+
+</body>
+</html>
